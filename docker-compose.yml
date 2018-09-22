@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+    env_file: my_service.env
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    env_file: my_service.env
