@@ -1,5 +1,16 @@
-How to launch
+dev mode
+========
 
+pip install requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+Got to http://127.0.0.1:8000
+
+
+pseudo-prod mode
+================
 
 1) Create my_service.env file containing:
 
@@ -19,4 +30,6 @@ docker-compose up
 docker-compose exec web python manage.py collectstatic
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
+
+Got to http://127.0.0.1
 
