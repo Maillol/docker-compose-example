@@ -6,6 +6,7 @@ How to launch
 POSTGRES_PASSWORD=mypassword  
 POSTGRES_USER=mydatabaseuser
 POSTGRES_DB=mydatabase
+SECRET_KEY=mysecretkey
 
 
 2) Build and launch containers
@@ -15,9 +16,7 @@ docker-compose up
 
 3) Migrate database and create superuser
 
+docker-compose exec web python manage.py collectstatic
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 
-TODO:
-
-Add Nginx container and remove web container exposed port 
