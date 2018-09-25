@@ -1,0 +1,15 @@
+FROM python:3.6
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y unzip 
+ADD https://chromedriver.storage.googleapis.com/2.42/chromedriver_linux64.zip /usr/bin/
+RUN unzip -d /usr/bin/ /usr/bin/chromedriver_linux64.zip  
+
+COPY requirements_test.txt ./
+RUN pip install --no-cache-dir -r requirements_test.txt
+
+COPY test.robot ./
+
+
+CMD [ "robot", "-v", "LOGIN_URL:frontend:8080", "test.robot" ]
