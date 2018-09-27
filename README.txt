@@ -9,6 +9,17 @@ python manage.py runserver
 Got to http://127.0.0.1:8000
 
 
+Functional tests
+----------------
+
+Note: You need to install browser and operating system specific browser drivers.
+    See: https://seleniumhq.github.io/selenium/docs/api/py/index.html#drivers
+
+pip install requirements_test.txt
+robot -v BROWSER:Chrome test.robot
+
+
+
 pseudo-prod mode
 ================
 
@@ -32,4 +43,12 @@ docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 
 Got to http://127.0.0.1
+
+
+Functional Tests 
+================
+
+docker-compose -f docker-compose.test.yml -p test build
+docker-compose -f docker-compose.test.yml -p test up -d
+
 

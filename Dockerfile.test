@@ -2,14 +2,28 @@ FROM python:3.6
 
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y unzip 
+RUN apt-get update && apt-get install -y unzip xvfb chromium
+
 ADD https://chromedriver.storage.googleapis.com/2.42/chromedriver_linux64.zip /usr/bin/
 RUN unzip -d /usr/bin/ /usr/bin/chromedriver_linux64.zip  
+
+
 
 COPY requirements_test.txt ./
 RUN pip install --no-cache-dir -r requirements_test.txt
 
+ENV SCREEN_WIDTH 1280
+ENV SCREEN_HEIGHT 720
+ENV SCREEN_DEPTH 16
+
+COPY entry_point.sh /entry_point.sh
+RUN chmod a+x /entry_point.sh
+
 COPY test.robot ./
 
 
+ENTRYPOINT [ "/entry_point.sh" ]
 CMD [ "robot", "-v", "LOGIN_URL:frontend:8080", "test.robot" ]
+
+
+

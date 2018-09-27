@@ -13,6 +13,9 @@ services:
     env_file: my_service.env
     volumes:
       - static-content:/usr/share/static-content
+      - ./init_test.sh:/opt/init_test.sh
+    command:
+        bash /opt/init_test.sh
 
   frontend:
     image: nginx
